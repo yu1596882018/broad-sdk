@@ -8,6 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build:web-sdk": "lerna exec --scope @broad/web-sdk yarn build"
+    "build:web-sdk": "lerna exec --scope @broad/web-sdk yarn build",
+    "publish": "lerna publish"
   }
 }
