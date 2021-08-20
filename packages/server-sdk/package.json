@@ -1,6 +1,6 @@
 {
   "name": "@broad/server-sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": "https://github.com/yu1596882018/broad-sdk.git",
   "author": "yu1596882018 <1596882018@qq.com>",
   "keywords": [
@@ -20,6 +20,5 @@
   ],
   "devDependencies": {
     "father-build": "^1.19.1"
-  },
-  "dependencies": {}
+  }
 }
