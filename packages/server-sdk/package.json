@@ -7,7 +7,7 @@
     "server",
     "sdk"
   ],
-  "license": "MIT",
+  "license": "ISC",
   "scripts": {
     "build": "father-build"
   },
