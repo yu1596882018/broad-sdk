@@ -1,0 +1,13 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build:web-sdk": "lerna exec --scope @broad/web-sdk yarn build"
+  }
+}

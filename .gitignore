@@ -1,0 +1,6 @@
+.idea
+node_modules
+**/dist
+**/es
+packages/server-sdk/lib
+packages/web-sdk/lib
