@@ -1,20 +1,24 @@
 {
-  "name": "@broad/web-sdk",
-  "version": "0.0.1",
+  "name": "@yu1596882018/web-sdk",
+  "version": "1.0.6",
   "repository": "https://github.com/yu1596882018/broad-sdk.git",
   "author": "yu1596882018 <1596882018@qq.com>",
   "keywords": [
     "web",
     "sdk"
   ],
-  "license": "MIT",
+  "license": "ISC",
   "scripts": {
     "build": "father-build"
   },
   "main": "lib/index.js",
   "module": "es/index.js",
+  "files": [
+    "lib",
+    "src",
+    "es"
+  ],
   "devDependencies": {
     "father-build": "^1.19.1"
-  },
-  "dependencies": {}
+  }
 }

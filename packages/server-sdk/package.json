@@ -1,20 +1,14 @@
 {
-  "name": "@broad/server-sdk",
-  "version": "0.0.1",
+  "name": "@yu1596882018/server-sdk",
+  "version": "1.0.3",
   "repository": "https://github.com/yu1596882018/broad-sdk.git",
   "author": "yu1596882018 <1596882018@qq.com>",
   "keywords": [
     "server",
     "sdk"
   ],
-  "license": "MIT",
-  "scripts": {
-    "build": "father-build"
-  },
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "devDependencies": {
-    "father-build": "^1.19.1"
-  },
-  "dependencies": {}
+  "license": "ISC",
+  "scripts": {},
+  "main": "index.js",
+  "gitHead": "af2486c179bcc831d6740a13699fbef78e34fb37"
 }
