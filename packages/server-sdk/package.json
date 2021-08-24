@@ -8,17 +8,7 @@
     "sdk"
   ],
   "license": "ISC",
-  "scripts": {
-    "build": "father-build"
-  },
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "files": [
-    "lib",
-    "src",
-    "es"
-  ],
-  "devDependencies": {
-    "father-build": "^1.19.1"
-  }
+  "scripts": {},
+  "main": "index.js",
+  "gitHead": "af2486c179bcc831d6740a13699fbef78e34fb37"
 }
