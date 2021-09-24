@@ -20,5 +20,6 @@
   ],
   "devDependencies": {
     "father-build": "^1.19.1"
-  }
+  },
+  "gitHead": "6a1ac82874392fba7cc9433c117f4727bca58692"
 }
