@@ -65,7 +65,12 @@ const pagePerformance = {
       let templeObj = {}
       if (usefulType.indexOf(item.initiatorType) > -1) {
         //请求资源路径
-        templeObj.name = item.name
+        if (/data:/.test(item.name)) {
+          // 处理base64加载
+          templeObj.name = item.name.slice(0, 20)
+        } else {
+          templeObj.name = item.name
+        }
         //发起资源类型
         templeObj.initiatorType = item.initiatorType
         //http协议版本
