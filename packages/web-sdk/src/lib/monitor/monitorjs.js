@@ -57,10 +57,12 @@ class MonitorJS {
     options = options || {}
     new MonitorNetworkSpeed(options).reportNetworkSpeed()
     let recordFunc = () => {
-      new MonitorPerformance(options).record()
+      setTimeout(() => {
+        new MonitorPerformance(options).record()
+      }, 1000)
     }
-    window.removeEventListener('unload', recordFunc)
-    window.addEventListener('unload', recordFunc)
+    window.removeEventListener('load', recordFunc)
+    window.addEventListener('load', recordFunc)
   }
 }
 

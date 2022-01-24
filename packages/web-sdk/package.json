@@ -1,6 +1,6 @@
 {
   "name": "@yu1596882018/web-sdk",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "repository": "https://github.com/yu1596882018/broad-sdk.git",
   "author": "yu1596882018 <1596882018@qq.com>",
   "keywords": [
@@ -20,5 +20,6 @@
   ],
   "devDependencies": {
     "father-build": "^1.19.1"
-  }
+  },
+  "gitHead": "6a1ac82874392fba7cc9433c117f4727bca58692"
 }
