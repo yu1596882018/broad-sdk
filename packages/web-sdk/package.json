@@ -7,7 +7,7 @@
     "web",
     "sdk"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "build": "father-build"
   },
@@ -21,5 +21,5 @@
   "devDependencies": {
     "father-build": "^1.19.1"
   },
-  "gitHead": "6a1ac82874392fba7cc9433c117f4727bca58692"
+  "gitHead": "48e15910ff94c69ac10ce31911cdf3b6c8aff1b7"
 }

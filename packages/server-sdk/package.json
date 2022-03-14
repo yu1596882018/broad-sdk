@@ -7,8 +7,8 @@
     "server",
     "sdk"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {},
   "main": "index.js",
-  "gitHead": "af2486c179bcc831d6740a13699fbef78e34fb37"
+  "gitHead": "48e15910ff94c69ac10ce31911cdf3b6c8aff1b7"
 }
