@@ -22,3 +22,4 @@ export const CacheData = (target, prototypeKey, descriptor) => {
     return result
   }
 }
+
