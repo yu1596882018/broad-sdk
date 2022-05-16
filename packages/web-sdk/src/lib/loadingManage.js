@@ -3,12 +3,12 @@ let $requestLoadingCount = 0
 
 export default function (requestOptions) {
   let options = {
-    openLoadingSwitch: true, // 设置本次请求开启loading，默认为true
+    openLoading: true, // 设置本次请求开启loading，默认为true
     ...(typeof requestOptions === 'object' ? requestOptions : {}),
   }
 
   let showLoading, loadingTimer
-  if (options.openLoadingSwitch) {
+  if (options.openLoading) {
     loadingTimer = setTimeout(() => {
       showLoading = true
       $requestLoadingCount++
