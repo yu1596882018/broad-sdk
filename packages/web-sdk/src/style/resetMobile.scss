@@ -75,17 +75,12 @@ input, textarea {
 }
 
 html body {
-  min-width: 320PX;
-  max-width: 750PX;
-  margin: 0 auto;
-  background: #fff;
   //overflow-x: hidden;
   -webkit-text-size-adjust: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-font-smoothing: antialiased;
   //-moz-user-select: none;
   color: #333;
-  transform-style: preserve-3d;
 }
 
 :focus {
