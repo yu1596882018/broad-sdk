@@ -1,10 +1,15 @@
 // Vue.js 使用示例
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import { MonitorJS, historyTrack, loadingManage, CacheData } from '@yu1596882018/web-sdk'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import {
+  MonitorJS,
+  historyTrack,
+  loadingManage,
+  CacheData,
+} from '@yu1596882018/web-sdk';
 
 // 使用 Vue Router
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 // 路由配置
 const routes = [
@@ -12,32 +17,32 @@ const routes = [
     path: '/',
     name: 'Home',
     component: {
-      template: '<div><h1>首页</h1><p>这是首页内容</p></div>'
-    }
+      template: '<div><h1>首页</h1><p>这是首页内容</p></div>',
+    },
   },
   {
     path: '/about',
     name: 'About',
     component: {
-      template: '<div><h1>关于</h1><p>这是关于页面</p></div>'
-    }
+      template: '<div><h1>关于</h1><p>这是关于页面</p></div>',
+    },
   },
   {
     path: '/contact',
     name: 'Contact',
     component: {
-      template: '<div><h1>联系</h1><p>这是联系页面</p></div>'
-    }
-  }
-]
+      template: '<div><h1>联系</h1><p>这是联系页面</p></div>',
+    },
+  },
+];
 
 const router = new VueRouter({
   mode: 'history',
-  routes
-})
+  routes,
+});
 
 // 安装历史记录追踪插件
-Vue.use(historyTrack, { router })
+Vue.use(historyTrack, { router });
 
 // 创建 Vue 实例
 const app = new Vue({
@@ -45,8 +50,8 @@ const app = new Vue({
   data() {
     return {
       loading: false,
-      userData: null
-    }
+      userData: null,
+    };
   },
   methods: {
     // 使用加载管理
@@ -54,36 +59,36 @@ const app = new Vue({
       const hideLoading = loadingManage({
         openLoading: true,
         showLoading: () => {
-          this.loading = true
-          console.log('显示加载状态')
+          this.loading = true;
+          console.log('显示加载状态');
         },
         hideLoading: () => {
-          this.loading = false
-          console.log('隐藏加载状态')
-        }
-      })
+          this.loading = false;
+          console.log('隐藏加载状态');
+        },
+      });
 
       try {
         // 模拟 API 请求
-        await new Promise(resolve => setTimeout(resolve, 2000))
-        this.userData = { id: 1, name: '张三', email: 'zhangsan@example.com' }
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        this.userData = { id: 1, name: '张三', email: 'zhangsan@example.com' };
       } catch (error) {
-        console.error('获取用户数据失败:', error)
+        console.error('获取用户数据失败:', error);
       } finally {
-        hideLoading()
+        hideLoading();
       }
     },
 
     // 测试路由追踪
     showHistoryTrack() {
-      console.log('当前历史记录:', this.$router.currentHistoryTrack)
-      console.log('完整历史记录:', this.$router.fullHistoryTrack)
+      console.log('当前历史记录:', this.$router.currentHistoryTrack);
+      console.log('完整历史记录:', this.$router.fullHistoryTrack);
     },
 
     // 测试错误监控
     testError() {
-      throw new Error('这是一个测试错误')
-    }
+      throw new Error('这是一个测试错误');
+    },
   },
   mounted() {
     // 初始化监控
@@ -99,17 +104,17 @@ const app = new Vue({
       extendsInfo: {
         userId: 'vue-demo-user',
         version: '1.0.0',
-        framework: 'vue'
-      }
-    })
+        framework: 'vue',
+      },
+    });
 
     // 性能监控
     MonitorJS.monitorPerformance({
       pageId: 'vue-demo',
-      url: 'https://api.example.com/performance-report'
-    })
+      url: 'https://api.example.com/performance-report',
+    });
 
-    console.log('Vue 应用已启动，监控系统已初始化')
+    console.log('Vue 应用已启动，监控系统已初始化');
   },
   template: `
     <div id="app">
@@ -136,11 +141,11 @@ const app = new Vue({
         <p>邮箱: {{ userData.email }}</p>
       </div>
     </div>
-  `
-})
+  `,
+});
 
 // 挂载应用
-app.$mount('#app')
+app.$mount('#app');
 
 // 导出供其他模块使用
-export default app 
+export default app;

@@ -14,23 +14,23 @@
  * api.getUserInfo.clearCache()
  */
 export const CacheData = (target, prototypeKey, descriptor) => {
-  const originalMethod = descriptor.value
+  const originalMethod = descriptor.value;
 
   descriptor.value = function (...args) {
     if (descriptor.value.cacheData) {
-      return descriptor.value.cacheData
+      return descriptor.value.cacheData;
     }
-    const result = originalMethod.apply(this, args)
-    descriptor.value.cacheData = result
+    const result = originalMethod.apply(this, args);
+    descriptor.value.cacheData = result;
     descriptor.value.clearCache = () => {
-      descriptor.value.cacheData = undefined
-    }
+      descriptor.value.cacheData = undefined;
+    };
     if (result instanceof Promise) {
       result.catch(() => {
-        descriptor.value.clearCache()
-      })
+        descriptor.value.clearCache();
+      });
     }
-    return result
-  }
-  return descriptor
-}
+    return result;
+  };
+  return descriptor;
+};

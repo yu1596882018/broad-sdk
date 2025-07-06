@@ -46,8 +46,6 @@
     "build": "father-build",
     "dev": "father dev",
     "clean": "rimraf lib es",
-    "lint": "eslint src --ext .js,.jsx,.ts,.tsx,.vue",
-    "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx,.vue --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,vue,scss}\"",
     "prepublishOnly": "yarn clean && yarn build"
   },

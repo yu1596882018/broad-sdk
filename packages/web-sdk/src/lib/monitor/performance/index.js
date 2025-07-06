@@ -30,7 +30,7 @@ class MonitorPerformance extends BaseMonitor {
    * @param {*} options
    */
   getSourceType(options) {
-    let usefulType = [] //'navigation'
+    const usefulType = [] //'navigation'
     options.isRScript !== false && usefulType.push('script') //资源数据细分，是否上报script数据
     options.isRCSS !== false && usefulType.push('css') //资源数据细分，是否上报CSS数据
     options.isRFetch !== false && usefulType.push('fetch') //资源数据细分，是否上报Fetch数据
@@ -52,7 +52,7 @@ class MonitorPerformance extends BaseMonitor {
       if (this.isResource) {
         this.config.resourceList = pagePerformance.getEntries(this.usefulType)
       }
-      let result = {
+      const result = {
         // curTime: new Date().format('yyyy-MM-dd HH:mm:ss'),
         performance: this.config.performance,
         resourceList: this.config.resourceList,
@@ -60,8 +60,8 @@ class MonitorPerformance extends BaseMonitor {
         markUv: this.markUv(),
         pageId: this.pageId,
       }
-      let extendsInfo = this.getExtendsInfo()
-      let data = {
+      const extendsInfo = this.getExtendsInfo()
+      const data = {
         ...extendsInfo,
         category: this.category,
         logType: ErrorLevelEnum.INFO,
@@ -81,9 +81,9 @@ class MonitorPerformance extends BaseMonitor {
 
   randomString(len) {
     len = len || 10
-    var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz123456789'
-    var maxPos = $chars.length
-    var pwd = ''
+    const $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz123456789'
+    const maxPos = $chars.length
+    let pwd = ''
     for (let i = 0; i < len; i++) {
       pwd = pwd + $chars.charAt(Math.floor(Math.random() * maxPos))
     }

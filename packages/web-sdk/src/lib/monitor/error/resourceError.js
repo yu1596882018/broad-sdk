@@ -20,8 +20,8 @@ class ResourceError extends BaseMonitor {
             return
           }
           this.category = ErrorCategoryEnum.RESOURCE_ERROR
-          let target = event.target || event.srcElement
-          var isElementTarget =
+          const target = event.target || event.srcElement
+          const isElementTarget =
             target instanceof HTMLScriptElement ||
             target instanceof HTMLLinkElement ||
             target instanceof HTMLImageElement

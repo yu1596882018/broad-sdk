@@ -38,8 +38,6 @@
   "scripts": {
     "build": "echo 'No build step required'",
     "test": "echo 'No tests specified'",
-    "lint": "eslint . --ext .js",
-    "lint:fix": "eslint . --ext .js --fix",
     "format": "prettier --write \"**/*.{js,json,md}\""
   },
   "engines": {

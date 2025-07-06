@@ -49,7 +49,7 @@ class BaseMonitor {
         console.log('统计错误接口异常', this.msg)
         return
       }
-      let errorInfo = this.handleErrorInfo()
+      const errorInfo = this.handleErrorInfo()
 
       console.log('\n````````````````````` ' + this.category + ' `````````````````````\n', errorInfo)
 
@@ -80,9 +80,9 @@ class BaseMonitor {
         txt += '其他错误: ' + JSON.stringify(this.errorObj) + '\r\n'
         break
     }
-    let deviceInfo = this.getDeviceInfo()
-    let extendsInfo = this.getExtendsInfo()
-    let recordInfo = extendsInfo
+    const deviceInfo = this.getDeviceInfo()
+    const extendsInfo = this.getExtendsInfo()
+    const recordInfo = extendsInfo
     recordInfo.category = this.category //错误分类
     recordInfo.logType = this.level //错误级别
     recordInfo.logInfo = txt //错误信息
@@ -96,7 +96,7 @@ class BaseMonitor {
    */
   getExtendsInfo() {
     try {
-      let ret = {}
+      const ret = {}
       let extendsInfo = this.extendsInfo || {}
       let dynamicParams
       if (utils.isFunction(extendsInfo.getDynamic)) {
@@ -107,7 +107,7 @@ class BaseMonitor {
         extendsInfo = { ...extendsInfo, ...dynamicParams }
       }
       //遍历扩展信息，排除动态方法
-      for (var key in extendsInfo) {
+      for (const key in extendsInfo) {
         if (!utils.isFunction(extendsInfo[key])) {
           //排除获取动态方法
           ret[key] = extendsInfo[key]
@@ -125,7 +125,7 @@ class BaseMonitor {
    */
   getDeviceInfo() {
     try {
-      let deviceInfo = DeviceInfo.getDeviceInfo()
+      const deviceInfo = DeviceInfo.getDeviceInfo()
       return deviceInfo
     } catch (error) {
       console.log(error)

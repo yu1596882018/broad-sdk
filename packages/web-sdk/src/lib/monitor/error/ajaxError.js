@@ -61,8 +61,8 @@ class XHRError extends BaseMonitor {
     if (!window.XMLHttpRequest) {
       return
     }
-    let xhrSend = XMLHttpRequest.prototype.send
-    let _handleEvent = (event) => {
+    const xhrSend = XMLHttpRequest.prototype.send
+    const _handleEvent = (event) => {
       try {
         if (event && event.currentTarget && event.currentTarget.status !== 200) {
           this.level = ErrorLevelEnum.WARN
@@ -85,7 +85,7 @@ class XHRError extends BaseMonitor {
         this.addEventListener('load', _handleEvent)
         this.addEventListener('abort', _handleEvent)
       } else {
-        let tempStateChange = this.onreadystatechange
+        const tempStateChange = this.onreadystatechange
         this.onreadystatechange = function (event) {
           tempStateChange.apply(this, arguments)
           if (this.readyState === 4) {

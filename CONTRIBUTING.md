@@ -38,7 +38,7 @@ yarn build:server-sdk
 我们使用 [Conventional Commits](https://www.conventionalcommits.org/) 规范：
 
 - `feat:` 新功能
-- `fix:` 修复bug
+- `fix:` 修复 bug
 - `docs:` 文档更新
 - `style:` 代码格式调整
 - `refactor:` 代码重构
@@ -46,6 +46,7 @@ yarn build:server-sdk
 - `chore:` 构建过程或辅助工具的变动
 
 示例：
+
 ```bash
 git commit -m "feat: add new monitoring feature"
 git commit -m "fix: resolve import path issue"
@@ -55,6 +56,7 @@ git commit -m "docs: update README with new examples"
 ## 🔧 开发流程
 
 1. **创建分支**
+
    ```bash
    git checkout -b feature/your-feature-name
    # 或
@@ -62,17 +64,20 @@ git commit -m "docs: update README with new examples"
    ```
 
 2. **开发代码**
+
    - 遵循现有的代码风格
    - 添加必要的注释
    - 确保代码通过测试
 
 3. **提交代码**
+
    ```bash
    git add .
    git commit -m "feat: your commit message"
    ```
 
 4. **推送分支**
+
    ```bash
    git push origin feature/your-feature-name
    ```

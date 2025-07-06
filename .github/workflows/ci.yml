@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -15,22 +15,22 @@ jobs:
         node-version: [12.x, 14.x, 16.x, 18.x]
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
 
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
-    - name: Build packages
-      run: yarn build
+      - name: Build packages
+        run: yarn build
 
-    - name: Run tests
-      run: yarn test
+      - name: Run tests
+        run: yarn test
 
   publish:
     needs: build
@@ -38,22 +38,22 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16.x'
-        cache: 'yarn'
-        registry-url: 'https://registry.npmjs.org'
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
 
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
-    - name: Build packages
-      run: yarn build
+      - name: Build packages
+        run: yarn build
 
-    - name: Publish to npm
-      run: yarn publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
+      - name: Publish to npm
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

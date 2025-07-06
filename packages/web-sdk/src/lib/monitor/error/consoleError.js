@@ -21,7 +21,7 @@ class ConsoleError extends BaseMonitor {
    * 处理信息
    */
   registerInfo() {
-    let t = this
+    const t = this
     console.tInfo = function () {
       t.handleLog(ErrorLevelEnum.INFO, ErrorCategoryEnum.CONSOLE_INFO, arguments)
     }
@@ -31,7 +31,7 @@ class ConsoleError extends BaseMonitor {
    * 处理警告
    */
   registerWarn() {
-    let t = this
+    const t = this
     console.tWarn = function () {
       t.handleLog(ErrorLevelEnum.WARN, ErrorCategoryEnum.CONSOLE_WARN, arguments)
     }
@@ -41,7 +41,7 @@ class ConsoleError extends BaseMonitor {
    * 处理错误
    */
   registerError() {
-    let t = this
+    const t = this
     console.tError = function () {
       t.handleLog(ErrorLevelEnum.ERROR, ErrorCategoryEnum.CONSOLE_ERROR, arguments)
     }
@@ -53,7 +53,7 @@ class ConsoleError extends BaseMonitor {
   handleLog(level, category, args) {
     try {
       this.level = level
-      let params = [...args]
+      const params = [...args]
       this.msg = params.join('\r\n') //换行符分割
       this.url = location.href //当前地址
       this.category = category
@@ -67,12 +67,12 @@ class ConsoleError extends BaseMonitor {
 /**
  * 初始化console事件
  */
-;(function () {
+(function () {
   //创建空console对象，避免JS报错
   if (!window.console) {
     window.console = {}
   }
-  let funcs = ['tInfo', 'tWarn', 'tError']
+  const funcs = ['tInfo', 'tWarn', 'tError']
   funcs.forEach((func, index) => {
     if (!console[func]) {
       console[func] = function () {}

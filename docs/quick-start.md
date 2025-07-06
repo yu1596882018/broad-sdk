@@ -1,6 +1,6 @@
 # 快速开始
 
-## 🚀 5分钟上手 Broad SDK
+## 🚀 5 分钟上手 Broad SDK
 
 ### 1. 安装
 
@@ -17,7 +17,7 @@ npm install @yu1596882018/server-sdk
 #### 错误监控
 
 ```javascript
-import { MonitorJS } from '@yu1596882018/web-sdk'
+import { MonitorJS } from '@yu1596882018/web-sdk';
 
 // 初始化监控
 MonitorJS.init({
@@ -28,9 +28,9 @@ MonitorJS.init({
   ajaxError: true,
   extendsInfo: {
     userId: 'user123',
-    version: '1.0.0'
-  }
-})
+    version: '1.0.0',
+  },
+});
 ```
 
 #### 性能监控
@@ -39,77 +39,77 @@ MonitorJS.init({
 // 监控页面性能
 MonitorJS.monitorPerformance({
   pageId: 'homepage',
-  url: 'https://your-api.com/performance-report'
-})
+  url: 'https://your-api.com/performance-report',
+});
 ```
 
 #### 路由追踪
 
 ```javascript
-import Vue from 'vue'
-import Router from 'vue-router'
-import { historyTrack } from '@yu1596882018/web-sdk'
+import Vue from 'vue';
+import Router from 'vue-router';
+import { historyTrack } from '@yu1596882018/web-sdk';
 
-Vue.use(Router)
+Vue.use(Router);
 const router = new Router({
   // 路由配置
-})
+});
 
 // 安装历史记录追踪
-Vue.use(historyTrack, { router })
+Vue.use(historyTrack, { router });
 
 // 使用追踪数据
-console.log(router.currentHistoryTrack) // 当前历史记录
-console.log(router.fullHistoryTrack)    // 完整历史记录
+console.log(router.currentHistoryTrack); // 当前历史记录
+console.log(router.fullHistoryTrack); // 完整历史记录
 ```
 
 #### 加载管理
 
 ```javascript
-import { loadingManage } from '@yu1596882018/web-sdk'
+import { loadingManage } from '@yu1596882018/web-sdk';
 
 // 在请求中使用
 const hideLoading = loadingManage({
   openLoading: true,
   showLoading: () => {
     // 显示loading
-    console.log('显示loading')
+    console.log('显示loading');
   },
   hideLoading: () => {
     // 隐藏loading
-    console.log('隐藏loading')
-  }
-})
+    console.log('隐藏loading');
+  },
+});
 
 // 请求完成后调用
-hideLoading()
+hideLoading();
 ```
 
 #### 接口缓存
 
 ```javascript
-import { CacheData } from '@yu1596882018/web-sdk'
+import { CacheData } from '@yu1596882018/web-sdk';
 
 class ApiService {
   @CacheData
   async getUserInfo(userId) {
-    return await fetch(`/api/user/${userId}`)
+    return await fetch(`/api/user/${userId}`);
   }
 }
 
-const api = new ApiService()
-const userInfo = await api.getUserInfo(123) // 第一次调用，会缓存结果
-const cachedUserInfo = await api.getUserInfo(123) // 第二次调用，返回缓存数据
+const api = new ApiService();
+const userInfo = await api.getUserInfo(123); // 第一次调用，会缓存结果
+const cachedUserInfo = await api.getUserInfo(123); // 第二次调用，返回缓存数据
 
 // 清除缓存
-api.getUserInfo.clearCache()
+api.getUserInfo.clearCache();
 ```
 
 ### 3. Vue.js 集成
 
 ```javascript
-import Vue from 'vue'
-import { MonitorJS, historyTrack, loadingManage } from '@yu1596882018/web-sdk'
+import Vue from 'vue';
+import { MonitorJS, historyTrack, loadingManage } from '@yu1596882018/web-sdk';
 
 // 在 Vue 应用中使用
 const app = new Vue({
@@ -121,37 +121,37 @@ const app = new Vue({
       vue: this,
       extendsInfo: {
         userId: 'vue-user',
-        version: '1.0.0'
-      }
-    })
+        version: '1.0.0',
+      },
+    });
 
     // 性能监控
     MonitorJS.monitorPerformance({
       pageId: 'vue-app',
-      url: 'https://your-api.com/performance-report'
-    })
+      url: 'https://your-api.com/performance-report',
+    });
   },
   methods: {
     async fetchData() {
       const hideLoading = loadingManage({
         openLoading: true,
         showLoading: () => {
-          this.loading = true
+          this.loading = true;
         },
         hideLoading: () => {
-          this.loading = false
-        }
-      })
+          this.loading = false;
+        },
+      });
 
       try {
         // 你的异步请求
-        await this.apiCall()
+        await this.apiCall();
       } finally {
-        hideLoading()
+        hideLoading();
       }
-    }
-  }
-})
+    },
+  },
+});
 ```
 
 ### 4. 响应式布局
@@ -184,32 +184,32 @@ import '@yu1596882018/web-sdk/src/lib/flexible'
 
 ### MonitorJS 配置
 
-| 参数 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| url | string | - | 错误上报地址 |
-| jsError | boolean | true | 是否监控JS错误 |
-| promiseError | boolean | true | 是否监控Promise错误 |
-| resourceError | boolean | true | 是否监控资源加载错误 |
-| ajaxError | boolean | true | 是否监控Ajax错误 |
-| consoleError | boolean | false | 是否监控Console错误 |
-| vueError | boolean | false | 是否监控Vue错误 |
-| vue | Vue | - | Vue实例（启用vueError时必需） |
-| extendsInfo | object | {} | 扩展信息 |
+| 参数          | 类型    | 默认值 | 说明                             |
+| ------------- | ------- | ------ | -------------------------------- |
+| url           | string  | -      | 错误上报地址                     |
+| jsError       | boolean | true   | 是否监控 JS 错误                 |
+| promiseError  | boolean | true   | 是否监控 Promise 错误            |
+| resourceError | boolean | true   | 是否监控资源加载错误             |
+| ajaxError     | boolean | true   | 是否监控 Ajax 错误               |
+| consoleError  | boolean | false  | 是否监控 Console 错误            |
+| vueError      | boolean | false  | 是否监控 Vue 错误                |
+| vue           | Vue     | -      | Vue 实例（启用 vueError 时必需） |
+| extendsInfo   | object  | {}     | 扩展信息                         |
 
 ### 性能监控配置
 
-| 参数 | 类型 | 说明 |
-|------|------|------|
-| pageId | string | 页面标识 |
-| url | string | 性能数据上报地址 |
+| 参数   | 类型   | 说明             |
+| ------ | ------ | ---------------- |
+| pageId | string | 页面标识         |
+| url    | string | 性能数据上报地址 |
 
 ### 加载管理配置
 
-| 参数 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| openLoading | boolean | true | 是否开启loading |
-| showLoading | function | - | 显示loading回调 |
-| hideLoading | function | - | 隐藏loading回调 |
+| 参数        | 类型     | 默认值 | 说明              |
+| ----------- | -------- | ------ | ----------------- |
+| openLoading | boolean  | true   | 是否开启 loading  |
+| showLoading | function | -      | 显示 loading 回调 |
+| hideLoading | function | -      | 隐藏 loading 回调 |
 
 ## 🔧 高级用法
 
@@ -221,17 +221,17 @@ MonitorJS.init({
   extendsInfo: {
     userId: 'user123',
     version: '1.0.0',
-    customField: 'customValue'
-  }
-})
+    customField: 'customValue',
+  },
+});
 
 // 手动上报错误
 MonitorJS.reportError({
   type: 'custom',
   message: '自定义错误信息',
   stack: '错误堆栈',
-  timestamp: Date.now()
-})
+  timestamp: Date.now(),
+});
 ```
 
 ### 路由追踪高级用法
@@ -241,10 +241,10 @@ MonitorJS.reportError({
 const historyStats = {
   totalPages: router.fullHistoryTrack.length,
   currentPage: router.currentHistoryTrack.length,
-  uniquePages: new Set(router.fullHistoryTrack.map(route => route.path)).size
-}
+  uniquePages: new Set(router.fullHistoryTrack.map(route => route.path)).size,
+};
 
-console.log('路由统计:', historyStats)
+console.log('路由统计:', historyStats);
 ```
 
 ### 缓存装饰器高级用法
@@ -254,17 +254,17 @@ class AdvancedApiService {
   @CacheData
   async getData(id, options = {}) {
     // 支持参数的缓存
-    const cacheKey = `${id}-${JSON.stringify(options)}`
-    return await this.fetchData(cacheKey)
+    const cacheKey = `${id}-${JSON.stringify(options)}`;
+    return await this.fetchData(cacheKey);
   }
 
   // 批量清除缓存
   clearAllCache() {
     Object.getOwnPropertyNames(this.constructor.prototype).forEach(method => {
       if (this[method].clearCache) {
-        this[method].clearCache()
+        this[method].clearCache();
       }
-    })
+    });
   }
 }
 ```
@@ -282,4 +282,4 @@ class AdvancedApiService {
 - 📖 [完整文档](../README.md)
 - 🐛 [报告问题](https://github.com/yu1596882018/broad-sdk/issues)
 - 💬 [讨论交流](https://github.com/yu1596882018/broad-sdk/discussions)
-- 📧 [联系作者](mailto:1596882018@qq.com) 
+- 📧 [联系作者](mailto:1596882018@qq.com)

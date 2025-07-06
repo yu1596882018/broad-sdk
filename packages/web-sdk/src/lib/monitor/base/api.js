@@ -23,7 +23,7 @@ class API {
    * 发送消息
    */
   sendInfo(data, isFetch) {
-    let dataStr = JSON.stringify(data)
+    const dataStr = JSON.stringify(data)
     try {
       if (fetch && isFetch) {
         fetch(this.url, {
@@ -41,7 +41,7 @@ class API {
       console.log('fetch请求异常', error)
     }
     try {
-      var xhr = new XMLHttpRequest()
+      const xhr = new XMLHttpRequest()
       xhr.open('POST', this.url, true)
       //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       xhr.setRequestHeader('Content-Type', 'application/json')
@@ -60,7 +60,7 @@ class API {
       return
     }
     try {
-      var img = new Image()
+      const img = new Image()
       img.src = this.url + '?v=' + new Date().getTime() + '&' + this.formatParams(data)
     } catch (error) {
       console.log(error)
@@ -78,8 +78,8 @@ class API {
    *格式化参数
    */
   formatParams(data) {
-    var arr = []
-    for (var name in data) {
+    const arr = []
+    for (const name in data) {
       arr.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]))
     }
     return arr.join('&')
@@ -92,7 +92,7 @@ class API {
     if (!url) {
       return false
     }
-    var urlRule = /^[hH][tT][tT][pP]([sS]?):\/\//
+    const urlRule = /^[hH][tT][tT][pP]([sS]?):\/\//
     return urlRule.test(url)
   }
 }

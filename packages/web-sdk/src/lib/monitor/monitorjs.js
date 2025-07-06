@@ -26,9 +26,9 @@ class MonitorJS {
     this.ajaxError = !(options.ajaxError === false)
     this.consoleError = options.consoleError === true //显式配置
     this.vueError = options.vueError === true //显式配置
-    let reportUrl = options.url //上报错误地址
-    let extendsInfo = options.extendsInfo || {} //扩展信息（一般用于系统个性化分析）
-    let param = { reportUrl, extendsInfo }
+    const reportUrl = options.url //上报错误地址
+    const extendsInfo = options.extendsInfo || {} //扩展信息（一般用于系统个性化分析）
+    const param = { reportUrl, extendsInfo }
     if (this.jsError) {
       new JsError(param).handleError()
     }
@@ -56,7 +56,7 @@ class MonitorJS {
   monitorPerformance(options) {
     options = options || {}
     new MonitorNetworkSpeed(options).reportNetworkSpeed()
-    let recordFunc = () => {
+    const recordFunc = () => {
       setTimeout(() => {
         new MonitorPerformance(options).record()
       }, 1000)

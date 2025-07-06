@@ -3,7 +3,7 @@ import API from './api.js'
 /**
  * 消息队列
  */
-var TaskQueue = {
+const TaskQueue = {
   /**
    * 是否停止fire
    */
@@ -32,7 +32,7 @@ var TaskQueue = {
       return
     }
     this.isStop = false
-    let item = this.queues[0]
+    const item = this.queues[0]
     item.reportUrl && new API(item.reportUrl).report(item.data)
     this.queues.splice(0, 1)
     this.fire() //递归

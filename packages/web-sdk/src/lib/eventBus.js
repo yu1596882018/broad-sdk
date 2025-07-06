@@ -16,8 +16,8 @@
 export default {
   install(Vue) {
     if (!Vue.prototype.$EventBus) {
-      const EventBus = new Vue()
-      Vue.prototype.$EventBus = EventBus
+      const EventBus = new Vue();
+      Vue.prototype.$EventBus = EventBus;
     }
   },
-}
+};

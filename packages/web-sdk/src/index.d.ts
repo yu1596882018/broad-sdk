@@ -63,7 +63,11 @@ export interface HistoryTrackPlugin {
 export type FlexibleFunction = () => void;
 
 // 缓存装饰器类型
-export type CacheDecorator = (target: any, propertyKey: string, descriptor: PropertyDescriptor) => PropertyDescriptor;
+export type CacheDecorator = (
+  target: any,
+  propertyKey: string,
+  descriptor: PropertyDescriptor,
+) => PropertyDescriptor;
 
 // 默认导出
 declare const MonitorJS: MonitorJS;
@@ -73,4 +77,4 @@ export default MonitorJS;
 export declare const loadingManage: LoadingManager;
 export declare const historyTrack: HistoryTrackPlugin;
 export declare const flexible: FlexibleFunction;
-export declare const CacheData: CacheDecorator; 
+export declare const CacheData: CacheDecorator;

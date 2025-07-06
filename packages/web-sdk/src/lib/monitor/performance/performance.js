@@ -8,9 +8,9 @@ const pagePerformance = {
         console.log('你的浏览器不支持 performance 操作')
         return
       }
-      var t = window.performance.timing
-      var times = {}
-      var loadTime = t.loadEventEnd - t.loadEventStart
+      const t = window.performance.timing
+      const times = {}
+      const loadTime = t.loadEventEnd - t.loadEventStart
       if (loadTime < 0) {
         setTimeout(function () {
           pagePerformance.getTiming()
@@ -56,13 +56,13 @@ const pagePerformance = {
       console.log('该浏览器不支持performance.getEntries方法')
       return
     }
-    let entryTimesList = []
-    let entryList = window.performance.getEntries()
+    const entryTimesList = []
+    const entryList = window.performance.getEntries()
     if (!entryList || entryList.length == 0) {
       return entryTimesList
     }
     entryList.forEach((item, index) => {
-      let templeObj = {}
+      const templeObj = {}
       if (usefulType.indexOf(item.initiatorType) > -1) {
         //请求资源路径
         if (/data:/.test(item.name)) {

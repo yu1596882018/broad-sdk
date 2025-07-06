@@ -18,7 +18,7 @@ class VueError extends BaseMonitor {
     }
     Vue.config.errorHandler = (error, vm, info) => {
       try {
-        let metaData = {
+        const metaData = {
           message: error.message,
           stack: error.stack,
           info: info,
