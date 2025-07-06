@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broad SDK - Web SDK 演示</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .demo-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .btn-danger {
+            background: #e74c3c;
+        }
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 Broad SDK - Web SDK 演示</h1>
+    
+    <div class="demo-section">
+        <h2 class="demo-title">1. 错误监控演示</h2>
+        <p>点击下面的按钮来测试不同类型的错误监控：</p>
+        
+        <button class="btn btn-danger" onclick="testJsError()">测试 JS 错误</button>
+        <button class="btn btn-danger" onclick="testPromiseError()">测试 Promise 错误</button>
+        <button class="btn btn-danger" onclick="testResourceError()">测试资源加载错误</button>
+        <button class="btn btn-danger" onclick="testConsoleError()">测试 Console 错误</button>
+        
+        <div id="error-status"></div>
+    </div>
+
+    <div class="demo-section">
+        <h2 class="demo-title">2. 性能监控演示</h2>
+        <p>页面加载时会自动收集性能数据：</p>
+        <div id="performance-status" class="status info">
+            性能监控已启用，数据将在页面加载完成后收集...
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2 class="demo-title">3. 加载管理演示</h2>
+        <p>模拟异步请求的加载状态：</p>
+        <button class="btn" onclick="testLoading()">模拟请求</button>
+        <div id="loading-status"></div>
+    </div>
+
+    <div class="demo-section">
+        <h2 class="demo-title">4. 接口缓存演示</h2>
+        <p>测试接口缓存功能：</p>
+        <button class="btn" onclick="testCache()">测试缓存</button>
+        <button class="btn" onclick="clearCache()">清除缓存</button>
+        <div id="cache-status"></div>
+    </div>
+
+    <div class="demo-section">
+        <h2 class="demo-title">5. 响应式布局演示</h2>
+        <p>当前页面已启用响应式布局，请调整浏览器窗口大小查看效果：</p>
+        <div style="background: #e8f4fd; padding: 15px; border-radius: 4px;">
+            <p>当前 rem 基准值：<span id="rem-value"></span></p>
+            <p>当前视口宽度：<span id="viewport-width"></span></p>
+        </div>
+    </div>
+
+    <script type="module">
+        // 导入 SDK
+        import { MonitorJS, loadingManage, CacheData } from '../packages/web-sdk/src/index.js';
+        
+        // 初始化监控
+        MonitorJS.init({
+            url: 'https://api.example.com/error-report',
+            jsError: true,
+            promiseError: true,
+            resourceError: true,
+            ajaxError: true,
+            consoleError: true,
+            extendsInfo: {
+                userId: 'demo-user',
+                version: '1.0.0',
+                page: 'demo'
+            }
+        });
+
+        // 性能监控
+        MonitorJS.monitorPerformance({
+            pageId: 'demo-page',
+            url: 'https://api.example.com/performance-report'
+        });
+
+        // 全局变量供演示使用
+        window.MonitorJS = MonitorJS;
+        window.loadingManage = loadingManage;
+        window.CacheData = CacheData;
+
+        // 更新响应式布局信息
+        function updateResponsiveInfo() {
+            const remValue = getComputedStyle(document.documentElement).fontSize;
+            const viewportWidth = window.innerWidth;
+            
+            document.getElementById('rem-value').textContent = remValue;
+            document.getElementById('viewport-width').textContent = viewportWidth + 'px';
+        }
+
+        // 页面加载完成后更新信息
+        window.addEventListener('load', () => {
+            updateResponsiveInfo();
+            document.getElementById('performance-status').innerHTML = 
+                '<div class="status success">✅ 性能监控数据已收集完成！</div>';
+        });
+
+        // 窗口大小改变时更新信息
+        window.addEventListener('resize', updateResponsiveInfo);
+    </script>
+
+    <script>
+        // 测试函数
+        function testJsError() {
+            try {
+                throw new Error('这是一个测试的 JS 错误');
+            } catch (error) {
+                console.error('捕获到 JS 错误:', error);
+                document.getElementById('error-status').innerHTML = 
+                    '<div class="status error">❌ JS 错误已触发并被监控系统捕获</div>';
+            }
+        }
+
+        function testPromiseError() {
+            Promise.reject(new Error('这是一个测试的 Promise 错误'))
+                .catch(error => {
+                    console.error('捕获到 Promise 错误:', error);
+                    document.getElementById('error-status').innerHTML = 
+                        '<div class="status error">❌ Promise 错误已触发并被监控系统捕获</div>';
+                });
+        }
+
+        function testResourceError() {
+            const img = new Image();
+            img.onerror = () => {
+                console.error('资源加载错误');
+                document.getElementById('error-status').innerHTML = 
+                    '<div class="status error">❌ 资源加载错误已触发并被监控系统捕获</div>';
+            };
+            img.src = 'non-existent-image.jpg';
+        }
+
+        function testConsoleError() {
+            console.error('这是一个测试的 Console 错误');
+            document.getElementById('error-status').innerHTML = 
+                '<div class="status error">❌ Console 错误已触发并被监控系统捕获</div>';
+        }
+
+        function testLoading() {
+            const statusEl = document.getElementById('loading-status');
+            statusEl.innerHTML = '<div class="status info">⏳ 开始模拟请求...</div>';
+
+            const hideLoading = window.loadingManage({
+                openLoading: true,
+                showLoading: () => {
+                    statusEl.innerHTML = '<div class="status info">🔄 显示 Loading...</div>';
+                },
+                hideLoading: () => {
+                    statusEl.innerHTML = '<div class="status success">✅ 请求完成，Loading 已隐藏</div>';
+                }
+            });
+
+            // 模拟异步请求
+            setTimeout(() => {
+                hideLoading();
+            }, 2000);
+        }
+
+        // 缓存测试类
+        class DemoApiService {
+            @window.CacheData
+            async getData(id) {
+                console.log(`正在获取数据 ${id}...`);
+                // 模拟异步请求
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                return { id, data: `数据 ${id}`, timestamp: Date.now() };
+            }
+        }
+
+        const apiService = new DemoApiService();
+
+        async function testCache() {
+            const statusEl = document.getElementById('cache-status');
+            statusEl.innerHTML = '<div class="status info">🔄 正在测试缓存...</div>';
+
+            try {
+                const startTime = Date.now();
+                const result1 = await apiService.getData(1);
+                const time1 = Date.now() - startTime;
+
+                const startTime2 = Date.now();
+                const result2 = await apiService.getData(1);
+                const time2 = Date.now() - startTime2;
+
+                statusEl.innerHTML = `
+                    <div class="status success">
+                        ✅ 缓存测试完成！<br>
+                        第一次请求: ${time1}ms<br>
+                        第二次请求: ${time2}ms (缓存)<br>
+                        数据: ${JSON.stringify(result1)}
+                    </div>
+                `;
+            } catch (error) {
+                statusEl.innerHTML = '<div class="status error">❌ 缓存测试失败</div>';
+            }
+        }
+
+        function clearCache() {
+            if (apiService.getData.clearCache) {
+                apiService.getData.clearCache();
+                document.getElementById('cache-status').innerHTML = 
+                    '<div class="status success">✅ 缓存已清除</div>';
+            }
+        }
+    </script>
+</body>
+</html> 

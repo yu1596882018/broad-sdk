@@ -1,91 +1,103 @@
-// 代码批量转二维码脚本
-const QRcode = require("qrcode");
-const fs = require('fs');
-const path = require('path');
-let errorNum = 0;
+/**
+ * 批量将代码文件内容转为二维码图片
+ * 支持递归遍历目录，分段生成二维码，支持多种代码文件类型
+ *
+ * 用法：node codeToQR.js
+ *
+ * @author yu1596882018
+ */
+const QRcode = require('qrcode')
+const fs = require('fs')
+const path = require('path')
+let errorCount = 0
 
-// 文件夹路径
-let filePath = path.resolve('./src'); // 需要读取的目录
-let outputPath = path.resolve('./output2'); // 二维码保存目录
+// 需要读取的目录
+const SRC_DIR = path.resolve('./src')
+// 二维码输出目录
+const OUTPUT_DIR = path.resolve('./output2')
 
-fileDisplay(filePath, outputPath);
+main()
 
-// 遍历文件夹
-function fileDisplay(filePath, outputPath) {
-  //根据文件路径读取文件，返回文件列表
-  fs.readdir(filePath, function(err, files) {
+function main() {
+  traverseDir(SRC_DIR, OUTPUT_DIR)
+}
+
+/**
+ * 遍历目录，递归处理文件和子目录
+ * @param {string} dirPath - 源目录
+ * @param {string} outputDir - 输出目录
+ */
+function traverseDir(dirPath, outputDir) {
+  fs.readdir(dirPath, (err, files) => {
     if (err) {
-      console.error(err, "读取文件失败")
-    } else {
-      //遍历读取到的文件列表
-      files.forEach(function(filename) {
-        //获取当前文件的绝对路径
-        let fileDir = path.join(filePath, filename);
-        let outputDir = path.join(outputPath, filename);
-        //根据文件路径获取文件信息
-        fs.stat(fileDir, function(err, stats) {
-          if (err) {
-            console.error('获取文件信息失败');
-          } else {
-            let isFile = stats.isFile();
-            let isDir = stats.isDirectory();
-            if (isFile && /(.html|.ts|.js|.scss|.json|.less|.css)$/i.test(fileDir)) {
-              // 是文件，打印文件路径
-              // outputDir = outputDir.replace(/\./g, '-')
-              // console.log(fileDir, outputDir)
-
-              fs.mkdir(outputDir,{recursive: true}, function (err) {
-                if(err) console.log('mkdir', outputDir, err);
-
-                try {
-                  var data = fs.readFileSync(fileDir);
-
-                  const text = data.toString()
-                  const textLength = text.length
-                  const contentNum = 2000
-                  const step = Math.ceil(textLength / contentNum)
-
-                  for (let i = 0; i < step; i++) {
-                    QRcode.toFile(
-                      path.join(outputDir, "./"+i+".jpg"),
-                      text.slice(i * contentNum, (i + 1) * contentNum),
-                      (err) => {
-                        if (err)  {
-                          QRcode.toFile(
-                            path.join(outputDir, "./"+i+"-0.jpg"),
-                            text.slice(i * contentNum, (i + 0.5) * contentNum),
-                            (err) => {
-                              if (err)  {
-                                console.log('toFile', path.join(outputDir, "./"+i+"-0.jpg"), err, ++errorNum)
-                              }
-                            }
-                          );
-
-                          QRcode.toFile(
-                            path.join(outputDir, "./"+i+"-1.jpg"),
-                            text.slice((i + 0.5) * contentNum, (i + 1) * contentNum),
-                            (err) => {
-                              if (err)  {
-                                console.log('toFile', path.join(outputDir, "./"+i+"-1.jpg"), err, ++errorNum)
-                              }
-                            }
-                          );
-                        }
-                      }
-                    );
-                  }
-                } catch (e) {
-                   console.log('readFileSync', fileDir, e);
-                }
-              })
-            }
-            if (isDir) {
-              //是文件夹，继续递归
-              fileDisplay(fileDir, outputDir);
-            }
-          }
-        })
-      });
+      console.error('[codeToQR] 读取目录失败:', dirPath, err)
+      return
     }
-  });
+    files.forEach(filename => {
+      const filePath = path.join(dirPath, filename)
+      const outPath = path.join(outputDir, filename)
+      fs.stat(filePath, (err, stats) => {
+        if (err) {
+          console.error('[codeToQR] 获取文件信息失败:', filePath, err)
+          return
+        }
+        if (stats.isFile() && /(.html|.ts|.js|.scss|.json|.less|.css)$/i.test(filePath)) {
+          // 处理代码文件
+          fs.mkdir(outPath, { recursive: true }, mkdirErr => {
+            if (mkdirErr) console.error('[codeToQR] 创建输出目录失败:', outPath, mkdirErr)
+            try {
+              const data = fs.readFileSync(filePath)
+              const text = data.toString()
+              const contentLen = 2000 // 每个二维码最大内容长度
+              const steps = Math.ceil(text.length / contentLen)
+              for (let i = 0; i < steps; i++) {
+                generateQR(
+                  path.join(outPath, `${i}.jpg`),
+                  text.slice(i * contentLen, (i + 1) * contentLen),
+                  (err) => {
+                    if (err) {
+                      // 分两段再尝试
+                      generateQR(
+                        path.join(outPath, `${i}-0.jpg`),
+                        text.slice(i * contentLen, (i + 0.5) * contentLen),
+                        (err) => {
+                          if (err) {
+                            console.error('[codeToQR] 二维码生成失败:', path.join(outPath, `${i}-0.jpg`), err, ++errorCount)
+                          }
+                        }
+                      )
+                      generateQR(
+                        path.join(outPath, `${i}-1.jpg`),
+                        text.slice((i + 0.5) * contentLen, (i + 1) * contentLen),
+                        (err) => {
+                          if (err) {
+                            console.error('[codeToQR] 二维码生成失败:', path.join(outPath, `${i}-1.jpg`), err, ++errorCount)
+                          }
+                        }
+                      )
+                    }
+                  }
+                )
+              }
+            } catch (e) {
+              console.error('[codeToQR] 读取文件失败:', filePath, e)
+            }
+          })
+        } else if (stats.isDirectory()) {
+          // 递归处理子目录
+          traverseDir(filePath, outPath)
+        }
+      })
+    })
+  })
+}
+
+/**
+ * 生成二维码图片
+ * @param {string} filePath - 输出图片路径
+ * @param {string} text - 二维码内容
+ * @param {Function} cb - 回调
+ */
+function generateQR(filePath, text, cb) {
+  QRcode.toFile(filePath, text, cb)
 }

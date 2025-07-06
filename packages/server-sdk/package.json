@@ -1,14 +1,49 @@
 {
   "name": "@yu1596882018/server-sdk",
   "version": "1.0.8",
-  "repository": "https://github.com/yu1596882018/broad-sdk.git",
+  "description": "Server-side utilities and tools for Node.js applications",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js",
+      "types": "./index.d.ts"
+    }
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "utils"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yu1596882018/broad-sdk.git",
+    "directory": "packages/server-sdk"
+  },
+  "homepage": "https://github.com/yu1596882018/broad-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/yu1596882018/broad-sdk/issues"
+  },
   "author": "yu1596882018 <1596882018@qq.com>",
   "keywords": [
     "server",
-    "sdk"
+    "sdk",
+    "nodejs",
+    "utilities",
+    "backend",
+    "javascript"
   ],
   "license": "MIT",
-  "scripts": {},
-  "main": "index.js",
+  "scripts": {
+    "build": "echo 'No build step required'",
+    "test": "echo 'No tests specified'",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "format": "prettier --write \"**/*.{js,json,md}\""
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "gitHead": "20f5cc5732ef5b71d6aa360077d96502c14ccabf"
 }

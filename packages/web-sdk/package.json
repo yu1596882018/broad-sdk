@@ -1,25 +1,65 @@
 {
   "name": "@yu1596882018/web-sdk",
   "version": "1.0.15",
-  "repository": "https://github.com/yu1596882018/broad-sdk.git",
+  "description": "A powerful frontend monitoring and utility library with error tracking, performance monitoring, and routing capabilities",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./lib/*": "./lib/*",
+    "./style/*": "./style/*"
+  },
+  "files": [
+    "lib",
+    "es",
+    "src",
+    "style"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yu1596882018/broad-sdk.git",
+    "directory": "packages/web-sdk"
+  },
+  "homepage": "https://github.com/yu1596882018/broad-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/yu1596882018/broad-sdk/issues"
+  },
   "author": "yu1596882018 <1596882018@qq.com>",
   "keywords": [
     "web",
-    "sdk"
+    "sdk",
+    "monitoring",
+    "error-tracking",
+    "performance",
+    "vue",
+    "router",
+    "frontend",
+    "javascript"
   ],
   "license": "MIT",
   "scripts": {
-    "build": "father-build"
+    "build": "father-build",
+    "dev": "father dev",
+    "clean": "rimraf lib es",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx,.vue",
+    "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx,.vue --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,vue,scss}\"",
+    "prepublishOnly": "yarn clean && yarn build"
   },
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "files": [
-    "lib",
-    "src",
-    "es"
-  ],
+  "peerDependencies": {
+    "vue": ">=2.0.0"
+  },
   "devDependencies": {
-    "father-build": "^1.19.1"
+    "father-build": "^1.19.1",
+    "rimraf": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=12.0.0"
   },
   "gitHead": "20f5cc5732ef5b71d6aa360077d96502c14ccabf"
 }

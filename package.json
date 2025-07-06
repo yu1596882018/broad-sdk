@@ -1,14 +1,51 @@
 {
-  "name": "root",
+  "name": "broad-sdk",
+  "version": "1.0.0",
+  "description": "A comprehensive SDK library with web monitoring and server utilities",
   "private": true,
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "@vue/eslint-config-standard": "^7.0.0",
+    "prettier": "^2.8.0"
   },
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
+    "build": "lerna run build",
     "build:web-sdk": "lerna exec --scope @yu1596882018/web-sdk yarn build",
-    "publish": "lerna publish"
-  }
+    "build:server-sdk": "lerna exec --scope @yu1596882018/server-sdk yarn build",
+    "clean": "lerna clean",
+    "publish": "lerna publish",
+    "test": "lerna run test",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.vue --fix",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,vue,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,vue,json,md,yml,yaml}\"",
+    "dev": "lerna run dev --parallel"
+  },
+  "engines": {
+    "node": ">=12.0.0",
+    "yarn": ">=1.22.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yu1596882018/broad-sdk.git"
+  },
+  "keywords": [
+    "sdk",
+    "monitoring",
+    "web",
+    "server",
+    "javascript",
+    "vue"
+  ],
+  "author": "yu1596882018 <1596882018@qq.com>",
+  "license": "MIT"
 }

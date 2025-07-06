@@ -1,10 +1,15 @@
-;(function flexible(window, document) {
-  var maxWidth = 750 // 最大宽度
-  var minWidth = 320 // 最小宽度
-  var docEl = document.documentElement
-  var dpr = window.devicePixelRatio || 1
+/**
+ * 移动端自适应布局（rem 适配）
+ * 最大宽度750px，最小宽度320px，1rem = 1/7.5 屏幕宽度
+ * 支持0.5px发丝线检测
+ */
+(function flexible(window, document) {
+  const maxWidth = 750 // 最大宽度
+  const minWidth = 320 // 最小宽度
+  const docEl = document.documentElement
+  const dpr = window.devicePixelRatio || 1
 
-  // adjust body font size
+  // 设置body字体大小，适配高清屏
   function setBodyFontSize() {
     if (document.body) {
       document.body.style.fontSize = 12 * dpr + 'px'
@@ -12,20 +17,20 @@
       document.addEventListener('DOMContentLoaded', setBodyFontSize)
     }
   }
+  // setBodyFontSize() // 如需全局字体大小适配可打开
 
-  // setBodyFontSize()
-
-  // set 1rem = viewWidth / 10
+  // 设置根元素rem单位
   function setRemUnit() {
-    var clientWidth = docEl.clientWidth > maxWidth ? maxWidth : docEl.clientWidth
-    clientWidth = clientWidth < minWidth ? minWidth : clientWidth
-    var rem = clientWidth / 7.5
+    let clientWidth = docEl.clientWidth
+    if (clientWidth > maxWidth) clientWidth = maxWidth
+    if (clientWidth < minWidth) clientWidth = minWidth
+    const rem = clientWidth / 7.5
     docEl.style.fontSize = rem + 'px'
   }
 
   setRemUnit()
 
-  // reset rem unit on page resize
+  // 页面尺寸变化时重设rem
   window.addEventListener('resize', setRemUnit)
   window.addEventListener('pageshow', function (e) {
     if (e.persisted) {
@@ -33,10 +38,10 @@
     }
   })
 
-  // detect 0.5px supports
+  // 检测0.5px支持，添加hairlines类
   if (dpr >= 2) {
-    var fakeBody = document.createElement('body')
-    var testElement = document.createElement('div')
+    const fakeBody = document.createElement('body')
+    const testElement = document.createElement('div')
     testElement.style.border = '.5px solid transparent'
     fakeBody.appendChild(testElement)
     docEl.appendChild(fakeBody)
