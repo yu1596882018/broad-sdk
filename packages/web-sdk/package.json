@@ -1,6 +1,6 @@
 {
   "name": "@yu1596882018/web-sdk",
-  "version": "1.0.15",
+  "version": "1.1.0",
   "description": "A powerful frontend monitoring and utility library with error tracking, performance monitoring, and routing capabilities",
   "main": "lib/index.js",
   "module": "es/index.js",
