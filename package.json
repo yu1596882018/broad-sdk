@@ -1,14 +1,57 @@
 {
-  "name": "root",
+  "name": "broad-sdk",
+  "version": "1.0.0",
+  "description": "一套面向生产环境的全栈开发工具集，提供前后端统一的日志监控、性能分析、错误追踪等能力",
   "private": true,
-  "devDependencies": {
-    "lerna": "^4.0.0"
+  "author": "yu1596882018 <1596882018@qq.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yu1596882018/broad-sdk.git"
+  },
+  "homepage": "https://github.com/yu1596882018/broad-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/yu1596882018/broad-sdk/issues"
+  },
+  "keywords": [
+    "monitor",
+    "performance",
+    "error-tracking",
+    "logging",
+    "sdk",
+    "frontend",
+    "backend",
+    "elasticsearch",
+    "kibana",
+    "monorepo"
+  ],
+  "engines": {
+    "node": ">=12.0.0",
+    "yarn": ">=1.22.0"
   },
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
+    "postinstall": "node scripts/postinstall.js",
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean",
+    "clean:all": "node scripts/clean.js --all",
+    "build": "yarn build:web-sdk",
     "build:web-sdk": "lerna exec --scope @yu1596882018/web-sdk yarn build",
-    "publish": "lerna publish"
+    "publish": "lerna publish",
+    "version": "lerna version",
+    "version:info": "node scripts/version.js",
+    "diff": "lerna diff",
+    "lint": "eslint packages/*/src --ext .js",
+    "format": "prettier --write \"packages/*/src/**/*.js\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^2.8.0"
   }
 }

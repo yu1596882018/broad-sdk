@@ -1,14 +1,50 @@
 {
   "name": "@yu1596882018/server-sdk",
   "version": "1.0.8",
-  "repository": "https://github.com/yu1596882018/broad-sdk.git",
+  "description": "Node.js 服务端 SDK，提供日志管理、监控数据处理、工具函数等能力",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yu1596882018/broad-sdk.git",
+    "directory": "packages/server-sdk"
+  },
+  "homepage": "https://github.com/yu1596882018/broad-sdk/tree/master/packages/server-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/yu1596882018/broad-sdk/issues"
+  },
   "author": "yu1596882018 <1596882018@qq.com>",
   "keywords": [
-    "server",
-    "sdk"
+    "logger",
+    "log4js",
+    "elasticsearch",
+    "monitoring",
+    "backend",
+    "sdk",
+    "koa",
+    "express",
+    "nodejs"
   ],
   "license": "MIT",
-  "scripts": {},
   "main": "index.js",
+  "files": [
+    "utils",
+    "index.js",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "peerDependencies": {
+    "@elastic/elasticsearch": "^8.0.0",
+    "log4js": "^6.0.0"
+  },
+  "dependencies": {
+    "useragent": "^2.3.0",
+    "uuid": "^8.3.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "gitHead": "20f5cc5732ef5b71d6aa360077d96502c14ccabf"
 }
