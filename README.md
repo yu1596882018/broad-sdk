@@ -592,7 +592,7 @@ app.use('/api/monitor', rateLimiter)
 本 SDK 已在 **楼市查询平台** 项目中稳定运行近一年，处理了超过 10 万次请求监控和 5000+ 错误追踪，证明了其在生产环境的稳定性和可靠性。
 
 **相关项目：**
-- [楼市查询平台 - 前端](https://github.com/yu1596882018/changshaHouseMoblie)
+- [楼市查询平台 - 前端](https://github.com/yu1596882018/changsha-house-mobile)
 - [楼市查询平台 - 后端](https://github.com/yu1596882018/changsha-house-backend)
 
 ## 🔧 本地开发
